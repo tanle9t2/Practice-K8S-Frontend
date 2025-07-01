@@ -1,0 +1,18 @@
+appName: react-frontend
+
+namespace: dev
+image:
+  name: tanle92/react-app
+  tag: v1.0.0
+
+service:
+  ports:
+    port: 80
+    nodePort: 30300
+
+backend:
+  name: spring-boot-backend
+  port: 8888
+
+configMap:
+  name: react-env-config
