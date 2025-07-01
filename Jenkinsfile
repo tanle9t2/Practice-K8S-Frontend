@@ -6,7 +6,7 @@ pipeline {
         SCANNER_HOME = tool 'sonar-scanner'
         IMAGE_NAME = "tanle92/react-app"
         BRANCH = "main"
-        REPO = 'https://github.com/tanle9t2/Practice-K8s.git'
+        REPO = 'https://github.com/tanle9t2/Practice-K8S-Frontend.git'
     }
 
     stages {
