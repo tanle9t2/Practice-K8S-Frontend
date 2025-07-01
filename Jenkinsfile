@@ -35,7 +35,14 @@ pipeline {
                 }
             }
         }
-
+        stage('Set Commit-Based Tag') {
+            steps {
+                script {
+                    def commit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    env.IMAGE_TAG = "main-${commit}"
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
