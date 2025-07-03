@@ -58,7 +58,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    if (env.RUN_PIPELINE) {
+                    if (env.RUN_PIPELINE == 'true') {
                         sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
                     }
                 }
@@ -69,7 +69,7 @@ pipeline {
             steps {
                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
                     script {
-                        if (env.RUN_PIPELINE) {
+                        if (env.RUN_PIPELINE == 'true') {
                             sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
                         }
                     }
@@ -80,7 +80,7 @@ pipeline {
         stage("Update Manifest") {
             steps {
                 script {
-                    if (env.RUN_PIPELINE) {
+                    if (env.RUN_PIPELINE == 'true') {
                         echo 'Updating K8s Manifest'
                         sshagent(credentials: ['github-ssh-key']) {
                             sh '''
