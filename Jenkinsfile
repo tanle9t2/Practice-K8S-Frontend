@@ -52,6 +52,7 @@ pipeline {
                     } else {
                         env.RUN_PIPELINE = "false"
                     }
+                    echo "Different: ${RUN_PIPELINE}"
                 }
             }
         }
