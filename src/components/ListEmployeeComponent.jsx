@@ -40,7 +40,7 @@ class ListEmployeeComponent extends Component {
     render() {
         return (
             <div>
-                <h2 className="text-center">Employees List V1.0.3</h2>
+                <h2 className="text-center">Employees List V1.0.4</h2>
                 <div className="row">
                     <button className="btn btn-primary" onClick={this.addEmployee}> Add Employee</button>
                 </div>
