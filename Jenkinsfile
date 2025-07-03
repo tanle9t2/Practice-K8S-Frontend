@@ -62,26 +62,27 @@ pipeline {
             }
         }
         stage("Update Manifest") {
-            echo 'Updating Manifest'
+            steps {
+                echo 'Updating Manifest'
 
-            withCredentials([
-                    string(credentialsId: 'GIT_USERNAME', variable: 'GIT_USERNAME'),
-                    string(credentialsId: 'GIT_EMAIL', variable: 'GIT_EMAIL')
-            ]) {
-                sh '''
-                    git config user.name "$GIT_USERNAME"
-                    git config user.email "GIT_EMAIL"
-                '''
-                sh '''
-                    git clone ${REPO_CONFIG}
-                    cd Practice-K8S-Frontend-Config/helm
-                    sed -i "s|tag: .*|tag: ${IMAGE_TAG}|" values.yaml
-                    git add values.yaml
-                    
-                    git commit -m "Update image tag to ${IMAGE_TAG}"
-                    git push origin main
-                '''
+                withCredentials([
+                        string(credentialsId: 'GIT_USERNAME', variable: 'GIT_USERNAME'),
+                        string(credentialsId: 'GIT_EMAIL', variable: 'GIT_EMAIL')
+                ]) {
+                    sh '''
+                git config user.name "$GIT_USERNAME"
+                git config user.email "$GIT_EMAIL"
+
+                git clone ${REPO_CONFIG}
+                cd Practice-K8S-Frontend-Config/helm
+                sed -i "s|tag: .*|tag: ${IMAGE_TAG}|" values.yaml
+                git add values.yaml
+                git commit -m "Update image tag to ${IMAGE_TAG}"
+                git push origin main
+            '''
+                }
             }
         }
+
     }
 }
